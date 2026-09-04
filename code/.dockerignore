@@ -1,0 +1,7 @@
+*
+!package.json
+!package-lock.json
+!server.mjs
+!xlsx-sync.mjs
+!schoolwiki-sync.mjs
+!vendor/xlsx-0.20.3.tgz
