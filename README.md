@@ -1,110 +1,64 @@
-# VitePress QUTWiKi Kit
+# 高校 Wiki（HighSchoolWiKi）
 
-面向第三方 VitePress 站点的 Wiki 工具包，提供两个可独立使用的版本：
+面向每个高校的 Wiki 知识库，由学生自发维护、共同编写的生活指南，帮助新生与在校生快速获取校园生活、学习资源、社团活动等实用信息。
 
-- **插件版**：`packages/vitepress-qutwiki-kit/`，接入已有 VitePress 1.x 项目。
-- **模板版**：`template/wiki/`，复制后直接建立新的内容型 Wiki。
+本站基于 [VitePress](https://vitepress.dev/) 构建、内容以 Markdown 编写。本仓库为可复用的 Wiki 工具仓库：核心能力封装成 VitePress 插件 `packages/vitepress-qutwiki-kit`，并提供可直接复制建站的 `template/wiki` 模板，`docs/` 承载插件文档与示例；整体结构见下文「项目结构」。
 
-仓库不包含任何学校正文、地图点位、组织名单、品牌资源或业务后端。组件用法参考了已在线运行的 [wiki.quters.top 功能说明](https://wiki.quters.top/start/about/features)，并保留线上页面链接作为真实案例。
+## 本地开发
 
-## 插件能力
-
-- 自动扫描 Markdown 并生成 sidebar/nav
-- 开发模式监听内容结构变化
-- 中文本地搜索双字分词
-- 中文字数与阅读时间
-- Markdown 图片题注
-- Gallery 自适应画廊
-- AppCards 应用与资源卡片
-- Flink/Flinks 友链卡片和 `<flink>` 容器语法
-- ImageViewer 图片缩放与拖动
-- 独立入口中的可选 Twikoo 评论组件
-
-## 快速开始
-
-运行插件文档站：
+需要 Node.js 22.17 或更高版本；依赖安装优先使用 `npm ci`，避免无意改动锁文件。在项目根目录执行：
 
 ```bash
 npm ci
-npm run dev
+npm run dev      # 启动开发服务器，访问 http://localhost:5173
 ```
 
-构建文档站和模板：
+在 Windows 上也可用 PowerShell 一键构建并启动本地开发服务器：
 
-```bash
-npm run check
+```powershell
+./build.ps1
 ```
 
-## 安装插件
+## 参与编写
 
-```bash
-npm install vitepress-qutwiki-kit
+想补充或修正站点内容？完整的环境准备、文档规范与提交流程见 [参与编写](https://wiki.quters.top/start/about/contribute) 页面，站点内容组织见下文「项目结构」。
+
+## 项目结构
+
+仓库以 npm workspace 组织，根目录为插件文档站：
+
+```
+.
+├── .gitattributes              # GitHub Linguist 配置
+├── .gitignore
+├── LICENSE
+├── README.md
+├── package.json                # npm workspace 根
+├── package-lock.json
+├── docs/                       # 插件文档与示例（VitePress）
+│   ├── index.md                # 文档首页
+│   ├── template.md             # 模板使用说明
+│   ├── examples/               # 各组件真实用法示例
+│   ├── plugin/                 # 插件介绍 / 安装 / API
+│   ├── public/
+│   └── .vitepress/             # 文档站配置与主题
+├── packages/
+│   └── vitepress-qutwiki-kit/  # 可独立安装的 Wiki 组件与插件
+│       └── package.json
+└── template/
+    └── wiki/                   # 可复制建站的 Wiki 内容站模板
+        ├── package.json
+        └── docs/
+            ├── index.md        # 模板首页
+            ├── guide/          # 示例内容页
+            ├── public/
+            └── .vitepress/     # site.ts / config.ts / theme
 ```
 
-主题入口：
+## 致谢
 
-```ts
-import DefaultTheme from 'vitepress/theme'
-import { installWikiComponents } from 'vitepress-qutwiki-kit'
+本项目的部分前端样式和后端代码参考了[西邮 Wiki](https://wiki.cooo.site/)（[xupt-wiki/xupt-wiki](https://github.com/xupt-wiki/xupt-wiki)），在此感谢西邮 Wiki 项目组的无私开源。
 
-export default {
-  extends: DefaultTheme,
-  enhanceApp({ app }) {
-    installWikiComponents(app)
-  },
-}
-```
+校园地图功能参考了[重庆大学校园地图导航系统](https://github.com/littlemana-bot/CQUMAPS)（[CQUMAPS](https://github.com/littlemana-bot/CQUMAPS)）与[重庆大学资源共享计划 CQU-openlib](https://github.com/INFO-studio/CQU-openlib)（[cqu-openlib.cn/map](https://cqu-openlib.cn/map)）的页面布局、交互设计与配色方案，在此感谢两个项目的无私开源。
 
-VitePress 配置：
-
-```ts
-import { defineConfig } from 'vitepress'
-import { installWikiMarkdown } from 'vitepress-qutwiki-kit/markdown'
-import { tokenizeChineseSearch } from 'vitepress-qutwiki-kit/config'
-
-export default defineConfig({
-  markdown: { config: installWikiMarkdown },
-  themeConfig: {
-    search: {
-      provider: 'local',
-      options: { miniSearch: { options: { tokenize: tokenizeChineseSearch } } },
-    },
-  },
-})
-```
-
-## 使用模板
-
-```bash
-cd template/wiki
-npm install
-npm run dev
-```
-
-复制模板到独立仓库后，修改：
-
-- `docs/.vitepress/site.ts`：站名、描述、仓库链接和目录名称
-- `docs/index.md`：首页
-- `docs/guide/`：内容
-- `docs/.vitepress/theme/style.css`：品牌色
-
-模板当前通过 `file:../../packages/vitepress-qutwiki-kit` 引用本仓库插件。独立使用时将其改为 npm 版本。
-
-## 文档
-
-- [插件介绍](docs/plugin/index.md)
-- [安装与配置](docs/plugin/usage.md)
-- [API 与边界](docs/plugin/migration.md)
-- [真实用法示例](docs/examples/index.md)
-- [模板说明](docs/template.md)
-
-## 真实案例
-
-- [线上功能说明](https://wiki.quters.top/start/about/features)
-- [Gallery 实际使用页面](https://wiki.quters.top/start/newstudent/campus-network)
-- [AppCards 实际使用页面](https://wiki.quters.top/start/campus-life/systems/software)
-- [Flink 实际使用页面](https://wiki.quters.top/flink)
-
-## 许可
-
-源代码和本仓库插件文档使用 [MIT License](LICENSE)。外部案例页面的内容及许可由其原站负责，本仓库不复制其校园业务正文。
+本仓库模板参考了[青岛理工大学 Wiki](https://wiki.quters.top/)（[quters/qut-wiki](https://github.com/quters/qut-wiki)），在此感谢青岛理工大学 Wiki 项目组的无私开源。
