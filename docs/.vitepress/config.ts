@@ -4,8 +4,8 @@ import { tokenizeChineseSearch } from 'vitepress-qutwiki-kit/config'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'VitePress QUTWiKi Kit',
-  description: '面向内容型 VitePress 站点的组件、Markdown 扩展与配置工具集',
+  title: 'CAPU·WiKi Project',
+  description: '为成都航空职业技术大学学生提供便捷的生活信息和资源',
   cleanUrls: true,
   lastUpdated: true,
   head: [['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]],
@@ -17,6 +17,7 @@ export default defineConfig({
       { text: '介绍', link: '/' },
       { text: '快速开始', link: '/plugin/usage' },
       { text: '示例', link: '/examples/' },
+      { text: '学校地图', link: '/map' },
       { text: '模板', link: '/template' },
     ],
     sidebar: {

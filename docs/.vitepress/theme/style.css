@@ -1,7 +1,86 @@
+/* ==========================================================================
+   QUTWiKi · 属于我们的主题色
+   灵感来源：QUTCraft 门户 —— 暖米色「纸感」底色 + 赤陶橙点缀
+   实现方式：覆盖 VitePress 官方 CSS 变量即可整站生效（kit 组件均走变量）。
+   ========================================================================== */
+
+/* ---- 亮色主题 ---- */
 :root {
-  --vp-c-brand-1: #176b87;
-  --vp-c-brand-2: #2388a8;
-  --vp-c-brand-3: #39a6c6;
+  /* 品牌：赤陶橙 */
+  --vp-c-brand-1: #a9360f;
+  --vp-c-brand-2: #c2491a;
+  --vp-c-brand-3: #d3612a;
+  --vp-c-brand-soft: rgba(169, 54, 15, 0.13);
+  --vp-c-brand: var(--vp-c-brand-1);
+
+  /* 页面底色：暖米纸感 */
+  --vp-c-bg: #fbf6ec;
+  --vp-c-bg-alt: #f3ecdd;
+  --vp-c-bg-elv: #fdfaf3;
+  --vp-c-bg-soft: #f5efe0;
+
+  /* 文字：暖棕 */
+  --vp-c-text-1: #3a3126;
+  --vp-c-text-2: #6e6050;
+  --vp-c-text-3: #9a8c77;
+
+  /* 分隔线 / 边框 */
+  --vp-c-border: #d9ccb4;
+  --vp-c-divider: #e6dbc6;
+  --vp-c-gutter: #ece1cd;
+
+  /* 提示 / 引用块跟随品牌色 */
+  --vp-c-tip-1: var(--vp-c-brand-1);
+  --vp-c-tip-2: var(--vp-c-brand-2);
+  --vp-c-tip-3: var(--vp-c-brand-3);
+  --vp-c-tip-soft: var(--vp-c-brand-soft);
+  --vp-c-note-1: var(--vp-c-brand-1);
+  --vp-c-note-2: var(--vp-c-brand-2);
+  --vp-c-note-3: var(--vp-c-brand-3);
+  --vp-c-note-soft: var(--vp-c-brand-soft);
+
+  /* 兼容部分组件引用的旧链接变量 */
+  --vp-c-link: var(--vp-c-brand-1);
+  --vp-c-link-hover: var(--vp-c-brand-2);
+}
+
+/* ---- 暗色主题：暖炭 + 余烬橙 ---- */
+.dark {
+  --vp-c-brand-1: #f9a15f;
+  --vp-c-brand-2: #ef7d38;
+  --vp-c-brand-3: #d4642c;
+  --vp-c-brand-soft: rgba(249, 161, 95, 0.16);
+  --vp-c-brand: var(--vp-c-brand-1);
+
+  --vp-c-bg: #201a11;
+  --vp-c-bg-alt: #171209;
+  --vp-c-bg-elv: #2a2216;
+  --vp-c-bg-soft: #2b2217;
+
+  --vp-c-text-1: #f2e7d4;
+  --vp-c-text-2: #c5b398;
+  --vp-c-text-3: #94866d;
+
+  --vp-c-border: #554838;
+  --vp-c-divider: #41372a;
+  --vp-c-gutter: #382e20;
+
+  --vp-c-tip-1: var(--vp-c-brand-1);
+  --vp-c-tip-2: var(--vp-c-brand-2);
+  --vp-c-tip-3: var(--vp-c-brand-3);
+  --vp-c-tip-soft: var(--vp-c-brand-soft);
+  --vp-c-note-1: var(--vp-c-brand-1);
+  --vp-c-note-2: var(--vp-c-brand-2);
+  --vp-c-note-3: var(--vp-c-brand-3);
+  --vp-c-note-soft: var(--vp-c-brand-soft);
+
+  --vp-c-link: var(--vp-c-brand-1);
+  --vp-c-link-hover: var(--vp-c-brand-2);
+}
+
+/* 选中文字使用品牌淡色，增强“属于我们”的质感 */
+::selection {
+  background: var(--vp-c-brand-soft);
 }
 
 .wk-word-count {
